@@ -1,0 +1,13 @@
+services:
+  telegram-autoposter:
+    build: .
+    container_name: telegram-autoposter
+    network_mode: host
+    environment:
+      - THEME=YOUR_THEME
+      - LINK=YOUR_LINK
+      - API_KEY=YOUR_API_KEY
+      - API_ID=YOUR_API_ID
+      - API_HASH=YOUR_API_HASH
+      - CHANNEL_ID=YOUR_CHANNEL_ID
+    restart: unless-stopped
