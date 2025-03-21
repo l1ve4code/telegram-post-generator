@@ -16,27 +16,27 @@ class ContentGenerator:
     def __init__(self, api_key, theme):
         self.api_key = api_key
         self.theme = theme
-        self.base_url = "https://router.huggingface.co/nebius/v1/chat/completions"
+        self.base_url = "https://api.zukijourney.com/v1/chat/completions"
 
     def generate_quote(self):
-        prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}."
+        prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}. Не более 200 символов."
         response = self._send_request(prompt)
-        return response.get("quote", "Не удалось сгенерировать цитату.")
+        return response["choices"][0]["message"]["content"]
 
     def generate_fact(self):
-        prompt = f"Расскажи краткую историческую справку или интересный факт на тему {self.theme}."
+        prompt = f"Расскажи краткую историческую справку или интересный факт на тему {self.theme}. Не более 300 символов."
         response = self._send_request(prompt)
-        return response.get("fact", "Не удалось сгенерировать факт.")
+        return response["choices"][0]["message"]["content"]
 
     def generate_tips(self):
-        prompt = f"Сгенерируй 2-3 практических совета на тему {self.theme}. Каждый совет должен начинаться с эмодзи."
+        prompt = f"Сгенерируй 2-3 практических совета на тему {self.theme}. Каждый совет должен начинаться с эмодзи. Не более 100 символов."
         response = self._send_request(prompt)
-        return response.get("tips", "Не удалось сгенерировать советы.")
+        return response["choices"][0]["message"]["content"]
 
     def generate_call_to_action(self):
-        prompt = f"Придумай призыв к действию или вопрос для обсуждения на тему {self.theme}."
+        prompt = f"Придумай призыв к действию или вопрос для обсуждения на тему {self.theme}. Не более 100 символов."
         response = self._send_request(prompt)
-        return response.get("call_to_action", "Не удалось сгенерировать призыв к действию.")
+        return response["choices"][0]["message"]["content"]
 
     def _send_request(self, prompt):
         headers = {
@@ -44,11 +44,10 @@ class ContentGenerator:
             "Content-Type": "application/json"
         }
         data = {
-            "model": "deepseek-ai/DeepSeek-R1-fast",
+            "model": "gpt-4o-mini",
             "messages": [
                 { "role": "user", "content": prompt }
-            ],
-            "stream": False
+            ]
         }
         try:
             response = requests.post(self.base_url, headers=headers, json=data)
@@ -105,7 +104,7 @@ async def run_scheduler():
         await asyncio.sleep(1)
 
 async def main():
-    telegram_poster.client.start()
+    await telegram_poster.client.start()
 
     asyncio.create_task(run_scheduler())
 
