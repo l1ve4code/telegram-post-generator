@@ -16,7 +16,7 @@ class ContentGenerator:
     def __init__(self, api_key, theme):
         self.api_key = api_key
         self.theme = theme
-        self.base_url = "https://api.zukijourney.com/v1/chat/completions"
+        self.base_url = "https://api.rimunace.xyz/v1/chat/completions"
 
     def generate_quote(self):
         prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}. Не более 200 символов."
