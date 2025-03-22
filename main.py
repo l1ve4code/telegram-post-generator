@@ -96,7 +96,7 @@ async def send_post():
     await telegram_poster.send_post(CHANNEL_ID, post_text, image_path)
 
 scheduler = Scheduler()
-scheduler.every(3).hours.do(lambda: asyncio.create_task(send_post()))
+scheduler.every(5).hours.do(lambda: asyncio.create_task(send_post()))
 
 async def run_scheduler():
     while True:
