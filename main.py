@@ -19,22 +19,22 @@ class ContentGenerator:
         self.base_url = "https://api.rimunace.xyz/v1/chat/completions"
 
     def generate_quote(self):
-        prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}. Не более 200 символов."
+        prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}. Не более 200 символов, только не пиши итоговое кол-во символов."
         response = self._send_request(prompt)
         return response["choices"][0]["message"]["content"]
 
     def generate_fact(self):
-        prompt = f"Расскажи краткую историческую справку или интересный факт на тему {self.theme}. Не более 300 символов."
+        prompt = f"Расскажи краткую историческую справку или интересный факт на тему {self.theme}. Не более 300 символов, только не пиши итоговое кол-во символов."
         response = self._send_request(prompt)
         return response["choices"][0]["message"]["content"]
 
     def generate_tips(self):
-        prompt = f"Сгенерируй 2-3 практических совета на тему {self.theme}. Каждый совет должен начинаться с эмодзи. Не более 100 символов."
+        prompt = f"Сгенерируй 2-3 практических совета на тему {self.theme}. Каждый совет должен начинаться с эмодзи. Не более 100 символов, только не пиши итоговое кол-во символов."
         response = self._send_request(prompt)
         return response["choices"][0]["message"]["content"]
 
     def generate_call_to_action(self):
-        prompt = f"Придумай призыв к действию или вопрос для обсуждения на тему {self.theme}. Не более 100 символов."
+        prompt = f"Придумай призыв к действию или вопрос для обсуждения на тему {self.theme}. Не более 100 символов, только не пиши итоговое кол-во символов."
         response = self._send_request(prompt)
         return response["choices"][0]["message"]["content"]
 
@@ -44,7 +44,7 @@ class ContentGenerator:
             "Content-Type": "application/json"
         }
         data = {
-            "model": "gpt-4o-mini",
+            "model": "deepseek-v3",
             "messages": [
                 { "role": "user", "content": prompt }
             ]
