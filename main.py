@@ -6,7 +6,8 @@ from telethon.errors import FloodWaitError
 from schedule import Scheduler
 
 THEME = os.getenv("THEME")
-LINK = os.getenv("LINK")
+BOT_LINK = os.getenv("BOT_LINK")
+CHANNEL_LINK = os.getenv("CHANNEL_LINK")
 API_KEY = os.getenv("API_KEY")
 API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
@@ -87,7 +88,9 @@ def generate_post():
 
 📢 **{call_to_action}**
 
-👉 [Перейти по ссылке]({LINK})
+👉 [Перейти по ссылке]({BOT_LINK})
+
+[📰 | #Дисконтика]({CHANNEL_LINK})
     """
 
 async def send_post():
