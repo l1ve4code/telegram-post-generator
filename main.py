@@ -16,7 +16,7 @@ class ContentGenerator:
     def __init__(self, api_key, theme):
         self.api_key = api_key
         self.theme = theme
-        self.base_url = "https://api.rimunace.xyz/v1/chat/completions"
+        self.base_url = "https://api.voidai.xyz/v1/chat/completions"
 
     def generate_quote(self):
         prompt = f"Сгенерируй мотивирующую цитату на тему {self.theme}. Не более 200 символов, только не пиши итоговое кол-во символов."
@@ -44,7 +44,7 @@ class ContentGenerator:
             "Content-Type": "application/json"
         }
         data = {
-            "model": "deepseek-v3",
+            "model": "gpt-4o",
             "messages": [
                 { "role": "user", "content": prompt }
             ]
@@ -92,7 +92,7 @@ def generate_post():
 
 async def send_post():
     post_text = generate_post()
-    image_path = "images/header.jpg"
+    image_path = "images/header.png"
     await telegram_poster.send_post(CHANNEL_ID, post_text, image_path)
 
 scheduler = Scheduler()
